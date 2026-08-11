@@ -117,6 +117,19 @@
   .history .hist-item:hover{background:var(--surface); color:var(--ink)}
   .history .hist-item.on{background:var(--surface); color:var(--accent)}
   .history .hist-empty{padding:6px 9px; font-size:11.5px; color:var(--muted)}
+  .saveidea{margin:7px 0 2px 2px; padding:3px 10px; font:inherit; font-size:11px; cursor:pointer; color:var(--muted); background:transparent; border:1px solid var(--line); border-radius:999px}
+  .saveidea:hover{border-color:var(--accent); color:var(--accent)}
+  .saveidea:disabled{opacity:.6; cursor:default; border-color:var(--line); color:var(--muted)}
+  .savedhead{display:flex; align-items:center; gap:6px}
+  .savedhead .cnt{background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:0 6px; font-size:10px; color:var(--muted)}
+  .savedhead .dlbtn{margin-left:auto; font:inherit; font-size:10px; cursor:pointer; color:var(--accent); background:transparent; border:1px solid var(--line); border-radius:6px; padding:2px 7px}
+  .savedhead .dlbtn:hover{border-color:var(--accent)}
+  .saved{max-height:24vh; overflow-y:auto; padding:2px 8px 6px}
+  .saved .saved-item{display:flex; align-items:center; gap:6px; padding:5px 9px; border-radius:7px}
+  .saved .saved-item:hover{background:var(--surface)}
+  .saved .saved-txt{flex:1; font-size:11.5px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .saved .saved-rm{flex:none; font-size:11px; cursor:pointer; color:var(--muted); background:transparent; border:0}
+  .saved .saved-rm:hover{color:var(--accent)}
   .thinking{color:var(--muted); font-size:13px; font-family:var(--mono)}
   .thinking:after{content:"▍"; animation:blink 1s steps(2) infinite}
   @keyframes blink{50%{opacity:0}}
@@ -134,6 +147,29 @@
   /* ---------- Composer ---------- */
   .composer{border-top:1px solid var(--line); padding:14px 26px 18px; background:var(--surface)}
   .composer-inner{max-width:760px; margin:0 auto; display:flex; gap:10px; align-items:flex-end}
+  .attach{flex:none; width:44px; height:44px; font-size:18px; cursor:pointer; color:var(--muted); background:var(--surface); border:1px solid var(--line); border-radius:12px}
+  .attach:hover{border-color:var(--accent); color:var(--accent)}
+  .modetoggle{flex:none; display:flex; gap:2px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:3px; height:44px; align-items:center}
+  .modetoggle button{width:38px; height:36px; font-size:16px; cursor:pointer; background:transparent; border:0; border-radius:9px; color:var(--muted); line-height:1}
+  .modetoggle button.on{background:#3f6fb2; color:#fff}
+  .gate{position:fixed; inset:0; z-index:99; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.72); backdrop-filter:blur(6px)}
+  .gate .modal{max-width:400px}
+  .gate-err{color:var(--accent); font-size:12.5px; margin:8px 0 0}
+  .modetoggle button:hover:not(.on){background:var(--line)}
+  .attachchip{max-width:760px; margin:0 auto 8px; display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:6px 10px; width:fit-content}
+  .attachchip button{cursor:pointer; color:var(--muted); background:transparent; border:0; font-size:12px}
+  .attachchip button:hover{color:var(--accent)}
+  .msg.user .filetag{display:inline-block; margin-top:6px; font-size:11px; color:var(--muted); background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:2px 8px}
+  .modecards{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:6px 0 22px}
+  .modecard{text-align:left; cursor:pointer; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px; transition:border-color .15s, transform .05s; font:inherit; color:var(--ink); display:flex; flex-direction:column; gap:6px}
+  .modecard:hover{border-color:var(--accent)}
+  .modecard:active{transform:translateY(1px)}
+  .modecard.on{border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent)}
+  .modecard .mc-ico{font-size:26px}
+  .modecard .mc-title{font-weight:650; font-size:15px}
+  .modecard .mc-desc{font-size:13px; color:var(--muted); line-height:1.45}
+  .egs-lead{font-size:12.5px; color:var(--muted); margin:0 0 8px}
+  @media (max-width:620px){ .modecards{grid-template-columns:1fr} }
   textarea{
     flex:1; resize:none; border:1px solid var(--line); background:var(--bg); color:var(--ink);
     border-radius:12px; padding:12px 14px; font-family:var(--sans); font-size:14px; line-height:1.45;
@@ -172,24 +208,12 @@
 <body>
 <div class="app">
   <aside class="sidebar">
-    <div class="brand"><b>nodriza<span class="dot">.</span></b><small>demo</small></div>
-    <nav class="nav">
-      <a><span class="ic">📊</span> Panel</a>
-      <a><span class="ic">📡</span> Campañas</a>
-      <a><span class="ic">🗓️</span> Calendario</a>
-      <a><span class="ic">📝</span> Briefs</a>
-      <div class="grouplabel">Inteligencia IA</div>
-      <a><span class="ic">💬</span> Conversar con IA</a>
-      <a class="active"><span class="ic">🧠</span> Mentor creativo</a>
-      <a><span class="ic">🧭</span> Estrategias</a>
-      <a><span class="ic">📈</span> Estudios</a>
-      <div class="grouplabel">Cuenta</div>
-      <a><span class="ic">👥</span> Equipo</a>
-      <a><span class="ic">⚙️</span> Configuración</a>
-    </nav>
+    <div class="brand"><b>Mentor<span class="dot">·</span></b><small>creativo</small></div>
     <button class="newchat" id="newChat">＋ Nueva conversación</button>
     <div class="grouplabel">Historial</div>
     <div class="history" id="history"></div>
+    <div class="grouplabel savedhead">Ideas guardadas <span class="cnt" id="savedCount">0</span><button class="dlbtn" id="dlIdeas" title="Descargar todas en .txt">⬇ .txt</button></div>
+    <div class="saved" id="saved"></div>
     <div class="side-foot">Escuela Iberoamericana · v0.1</div>
   </aside>
 
@@ -205,28 +229,56 @@
       <button class="iconbtn" id="keyBtn">⚙ Conectar Claude</button>
     </div>
 
-    <div class="voices" id="voices">
-      <span class="lbl">Enfoque</span>
-    </div>
 
     <div class="thread" id="thread">
       <div class="thread-inner" id="threadInner">
         <div class="empty" id="empty">
-          <h2>Tirame un brief o una idea.</h2>
-          <p>Te la voy a tensionar como lo haría la escuela iberoamericana: primero el problema real, después la verdad humana, y recién ahí la idea —en una sola frase. Elegí una voz arriba o dejá la escuela entera. Probá con uno de estos:</p>
-          <div class="egs" id="egs"></div>
+          <div class="modecards">
+            <button class="modecard" data-mode="auto">
+              <div class="mc-ico">🏓</div>
+              <div class="mc-title">Ping pong creativo</div>
+              <div class="mc-desc">Subí el brief de tu campaña o contame una idea, y entre ambos vamos a encontrar el mejor camino.</div>
+            </button>
+            <button class="modecard" data-mode="presion">
+              <div class="mc-ico">🥊</div>
+              <div class="mc-title">Bochador de ideas</div>
+              <div class="mc-desc">¿Tenés una idea cerrada? Probala acá para asegurarte de que sea infalible.</div>
+            </button>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="composer">
+      <div class="attachchip" id="attachChip" style="display:none"></div>
       <div class="composer-inner">
-        <textarea id="input" placeholder="Ej: campaña para una app de finanzas para jóvenes sobre 'ordenar tus finanzas'…" rows="1"></textarea>
+        <button class="attach" id="attachBtn" title="Adjuntar PDF, imagen o .txt (Word/PPT: guardalos como PDF)">📎</button>
+        <div class="modetoggle" id="modeToggle">
+          <button data-mode="auto" title="Ping pong creativo — pensar juntos">🏓</button>
+          <button data-mode="presion" title="Bochador de ideas — atacar la idea">🥊</button>
+        </div>
+        <textarea id="input" placeholder="Ej: campaña para una app de finanzas… (o adjuntá un brief con 📎)" rows="1"></textarea>
         <button class="send" id="send">Consultar</button>
+        <input type="file" id="fileInput" accept=".pdf,.png,.jpg,.jpeg,.webp,.gif,.txt,.md" style="display:none">
       </div>
       <div class="hint" id="hint">Modo demo: respuestas generadas localmente. Conectá tu API key de Claude para respuestas en vivo.</div>
     </div>
   </main>
+</div>
+
+<div class="gate" id="gate" style="display:none">
+  <div class="modal">
+    <h3>🔒 Acceso al Mentor creativo</h3>
+    <p>Esta es una versión de prueba privada. Ingresá el código de acceso que te compartieron.</p>
+    <div class="field">
+      <label>Código de acceso</label>
+      <input type="password" id="gateInput" placeholder="código…" autocomplete="off" />
+    </div>
+    <div class="gate-err" id="gateErr" style="display:none">Código incorrecto. Probá de nuevo.</div>
+    <div class="modal-actions">
+      <button class="btn-primary" id="gateEnter">Entrar</button>
+    </div>
+  </div>
 </div>
 
 <div class="backdrop" id="backdrop">
@@ -274,7 +326,7 @@ const MENTOR_BASE =
   "SUBÍ DE ALTURA (clave, no lo saltees): no te quedes solo en la pieza, el copy o el chiste. Cuando debajo del pedido hay algo más grande —un posicionamiento, una plataforma, una idea de marca— NOMBRALO: '¿esto es un post suelto, o puede ser una idea de marca sobre X?'. Movete entre el detalle de ejecución y la altura estratégica, y ofrecé la lectura de arriba aunque hayan pedido algo chico.\n\n" +
   "SOSTENÉ EL RIESGO: protegé el camino más vivo; no te repliegues a lo seguro y prolijo. Si el usuario se inclina por lo cómodo, empujá UNA vez por lo más arriesgado antes de aceptar. Que algo dé un poco de miedo suele ser buena señal.\n\n" +
   "PONÉ A PRUEBA LA IDEA (no te enamores): cuando hay una idea concreta sobre la mesa —tuya o del usuario— sometela a presión antes de celebrarla. Preguntá: ¿cómo se cae?, ¿cómo la mata el cliente o legales?, ¿cómo la ignora la gente en 2 segundos de scroll?, ¿qué pasa si el competidor la copia mañana?, ¿en qué contexto real queda mal o se malinterpreta? Si sobrevive el ataque, es fuerte; si no, decilo sin vueltas y mostrá dónde se rompe. Atacar la idea es cuidarla, no destruirla.\n\n" +
-  "LAS VOCES DISCUTEN (esto te separa de un estratega genérico): no razones como una sola voz promedio. Traé a las mentes de la escuela con SU criterio y HACELAS CHOCAR —cada una tiene un modelo mental, algo que PROTEGE y un punto ciego. Tensiones vivas: Ogilvy ('¿esto vende?, ¿cuál es la promesa?') vs Bernbach ('la idea y la verdad humana primero'); Wilhelm (anti-bullshit, el negocio) vs Agulla (el riesgo emocional, jugarse); Bayala/Wieden/Polar suben el problema a lo cultural. En modo Escuela (todas): montá una discusión real de 2-3 voces relevantes que SE CONTRADIGAN (la fricción es el valor) y después sacá tu síntesis jugada. En modo de una sola voz: SÉ esa mente con todo su filo, sus obsesiones y su sesgo.\n\n" +
+  "LAS VOCES DISCUTEN (esto te separa de un estratega genérico): no razones como una sola voz promedio. Traé a las mentes de la escuela con SU criterio y HACELAS CHOCAR —cada una tiene un modelo mental, algo que PROTEGE y un punto ciego. Tensiones vivas: Ogilvy ('¿esto vende?, ¿cuál es la promesa?') vs Bernbach ('la idea y la verdad humana primero'); Wilhelm (anti-bullshit, el negocio) vs Agulla (el riesgo emocional, jugarse); Bayala/Wieden/Polar suben el problema a lo cultural. Montá una discusión real de 2-3 voces relevantes que SE CONTRADIGAN (la fricción es el valor) y después sacá tu síntesis jugada. ROTÁ LAS VOCES según el problema —elegí las mentes cuyo criterio MÁS aporta a ESTE caso (retail/venta → Ogilvy, Reeves, Baccetti; emoción/identidad → Olabuenaga, Bernbach, Agulla; momento cultural → Bayala, Polar, Wieden, Machado; producto/utilidad → Vega Olmos, Polar; coraje/fama/earned → Machado, Ramos, Agulla; craft/simplicidad → Cabral, Del Campo)— y NO caigas siempre en las mismas tres (Wilhelm/Bayala/Bernbach). Si no está claro qué tratamiento busca el usuario (más jugado, más de negocio, más cultural…), ofrecéle elegir el ángulo en la pregunta de cierre.\n\n" +
   "PENSÁ, NO CITES: el material de las voces es CONOCIMIENTO DE FONDO para razonar; cuando traés a alguien es por su CRITERIO (qué preguntaría, qué protegería, dónde se equivoca), no por su frase. Citas textuales: COMO MUCHO UNA por respuesta y solo si empuja el pensamiento.\n\n" +
   "REGLA DE ATRIBUCIÓN (legal): cuando SÍ traés a una persona real, nunca hablás en su nombre; la citás atribuida y prudente ('como planteaba Wilhelm, …'), solo con frases documentadas; si no estás seguro de la textual, parafraseás sin comillas.\n\n" +
   "Tono rioplatense, directo, con humor nunca gratuito. Empezás por el problema; nunca resolvés de una. Conciso pero DENSO: sin relleno, y extendete solo cuando el pensamiento lo pide.";
@@ -296,14 +348,10 @@ const VOICE_OVERLAY = {
   wieden:"\n\nVOZ ACTIVA — DAN WIEDEN (estadounidense, Wieden+Kennedy; las marcas como movimientos culturales): no empieces por el producto —preguntá '¿qué REPRESENTA en la vida de alguien?'. La marca no ocupa un espacio en la mente, sino en la CULTURA: participa de ella, no la interrumpe. Buscá una verdad humana tan amplia que sostenga infinitas historias ('Just Do It' no es un slogan, es una manera de interpretar el esfuerzo humano). Construí una PLATAFORMA, no una campaña —vale más que cien anuncios, tiene que poder vivir 10 años. El propósito se DEMUESTRA, no se declara; autenticidad > perfección. La marca es una invitación ('atrevete a intentarlo'), no una obligación. El miedo es enemigo de la creatividad. Rechazá lo táctico sin visión, los propósitos inventados y las marcas oportunistas. Preguntá: ¿qué causa representa?, ¿la gente la haría propia?, ¿inspira o solo informa?",
 };
 
-/* Lentes de intención (no se elige un publicista: se elige un enfoque). */
+/* Dos modos: el mentor razona y decide, o boch a fondo una idea. */
 const VOICES = [
-  {k:"auto",     name:"🧭 El mentor decide"},
-  {k:"jugado",   name:"🔥 Más jugado"},
-  {k:"cultural", name:"🌍 Más cultural"},
-  {k:"negocio",  name:"💼 Más de negocio"},
-  {k:"idea",     name:"✍️ Más idea/craft"},
-  {k:"presion",  name:"🧨 Ponela a prueba"},
+  {k:"auto",     name:"🏓 Ping pong creativo"},
+  {k:"presion",  name:"🥊 Bochador de ideas"},
 ];
 
 /* Las 14 mentes viven acá como CONOCIMIENTO que el mentor cruza (y cita si es documentado). */
@@ -398,7 +446,7 @@ const LENS_NUDGE = {
   cultural:"\n\nLENTE PEDIDA: MÁS CULTURAL/SOCIAL. Apoyate sobre todo en Bayala, Polar y Wieden: subí el problema a la tensión cultural y al significado, sin dejar de cruzar con las demás.",
   negocio:"\n\nLENTE PEDIDA: MÁS DE NEGOCIO. Apoyate sobre todo en Ogilvy, Reeves, Wilhelm y Baccetti: exigí promesa, USP, venta y lugar de marca, sin dejar de cruzar con las demás.",
   idea:"\n\nLENTE PEDIDA: MÁS IDEA/CRAFT. Apoyate sobre todo en Bernbach, Vega Olmos, Cabral, Del Campo y Leo Burnett: buscá la verdad humana, la idea, el personaje/símbolo y la ejecución impecable, sin dejar de cruzar con las demás.",
-  presion:"\n\nLENTE PEDIDA: PONELA A PRUEBA (pressure-test agresivo). Agarrá la idea que está sobre la mesa y atacála a fondo: ¿cómo se cae?, ¿cómo la mata el cliente o legales?, ¿cómo la ignora la gente en el scroll?, ¿cómo la copia el competidor mañana?, ¿dónde se malinterpreta o queda mal? Sé duro pero justo. Si sobrevive, decilo y por qué; si no, mostrá EXACTAMENTE dónde se rompe y qué haría falta para salvarla. No propongas ideas nuevas: tu trabajo acá es estresar la que hay.",
+  presion:"\n\nMODO BOCHADOR DE IDEAS (pressure-test agresivo). Agarrá la idea que está sobre la mesa y atacála a fondo: ¿cómo se cae?, ¿cómo la mata el cliente o legales?, ¿cómo la ignora la gente en el scroll?, ¿cómo la copia el competidor mañana?, ¿dónde se malinterpreta o queda mal? Sé duro pero justo. Si sobrevive, decilo y por qué; si no, mostrá EXACTAMENTE dónde se rompe y qué haría falta para salvarla. No propongas ideas nuevas: tu trabajo acá es estresar la que hay.",
 };
 
 /* datos para el cerebro DEMO (offline) */
@@ -469,7 +517,7 @@ const el = (t,c)=>{const e=document.createElement(t); if(c)e.className=c; return
 
 /* ===================== UI init ===================== */
 function initVoices(){
-  const box = $("#voices");
+  const box = $("#voices"); if(!box) return;
   VOICES.forEach((v)=>{
     const b = el("button","chip"+(v.k===voice?" on":""));
     b.textContent = v.name; b.dataset.k=v.k;
@@ -483,7 +531,7 @@ const EGS = [
   {k:"Autos",    t:"Marca de autos eléctricos que quiere comunicar 'innovación y sustentabilidad'."},
 ];
 function initEgs(){
-  const box = $("#egs");
+  const box = $("#egs"); if(!box) return;
   EGS.forEach((e)=>{
     const b = el("button","eg");
     b.innerHTML = `<span class="k">${e.k}</span>${e.t}`;
@@ -493,9 +541,11 @@ function initEgs(){
 }
 
 /* ===================== Render de mensajes ===================== */
-function addUser(text){
+function addUser(text, fileName){
   const m=el("div","msg user"); const w=el("div","who"); w.textContent="Vos";
-  const b=el("div","bubble"); b.textContent=text; m.append(w,b); mount(m);
+  const b=el("div","bubble"); b.textContent=text; m.append(w,b);
+  if(fileName){ const f=el("div","filetag"); f.textContent="📎 "+fileName; b.appendChild(f); }
+  mount(m);
 }
 function botShell(){
   const m=el("div","msg bot"); const w=el("div","who"); w.textContent="🧠 Mentor";
@@ -562,10 +612,11 @@ async function liveReply(){
   const model=localStorage.getItem("mentorDemo.model")||"claude-sonnet-5";
   const res=await fetch("/api/mentor",{
     method:"POST",
-    headers:{"content-type":"application/json"},
-    body:JSON.stringify({model,max_tokens:3000,system:MENTOR_BASE+ROSTER+REFERENCIAS+refsBlock(hist.filter(m=>m.role==="user").map(m=>m.content).join(" "))+(LENS_NUDGE[voice]||""),messages:hist}),
+    headers:{"content-type":"application/json","x-mentor-token":(localStorage.getItem("mentorDemo.token")||"")},
+    body:JSON.stringify({model,max_tokens:3000,system:MENTOR_BASE+ROSTER+REFERENCIAS+refsBlock(hist.filter(m=>m.role==="user").map(m=>msgText(m)).join(" "))+(LENS_NUDGE[voice]||""),messages:hist}),
   });
   const data=await res.json().catch(()=>({}));
+  if(res.status===401){ localStorage.removeItem("mentorDemo.token"); showGate(true); throw new Error("Código de acceso inválido o vencido."); }
   if(!res.ok){ throw new Error(data.error||("El servidor respondió "+res.status)); }
   return data.text||"";
 }
@@ -575,22 +626,34 @@ async function liveReply(){
 let chatId = null;
 function loadChats(){ try{ return JSON.parse(localStorage.getItem("mentorDemo.chats")||"[]"); }catch(_){ return []; } }
 function saveChats(a){ localStorage.setItem("mentorDemo.chats", JSON.stringify(a.slice(0,50))); }
-function chatTitle(){ const u=hist.find(m=>m.role==="user"); return u ? u.content.slice(0,44) : "Charla nueva"; }
+function chatTitle(){ const u=hist.find(m=>m.role==="user"); return u ? msgText(u).slice(0,44) : "Charla nueva"; }
 function saveCurrent(){
   if(!hist.length) return;
   if(!chatId) chatId = "c"+Date.now();
+  const slim = hist.map(m=>{ if(typeof m.content==="string") return m; const hasFile=(m.content||[]).some(b=>b.type!=="text"); return {role:m.role, content: msgText(m)+(hasFile?" [📎 archivo adjunto]":"")}; });
   const a = loadChats().filter(c=>c.id!==chatId);
-  a.unshift({ id:chatId, title:chatTitle(), ts:Date.now(), voice, hist });
+  a.unshift({ id:chatId, title:chatTitle(), ts:Date.now(), voice, hist:slim });
   saveChats(a); localStorage.setItem("mentorDemo.current", chatId);
 }
 function showEmpty(){
-  $("#threadInner").innerHTML = '<div class="empty" id="empty"><h2>Tirame un brief o una idea.</h2><p>Te la voy a tensionar como lo haría la escuela iberoamericana: primero el problema real, después la verdad humana, y recién ahí la idea —en una sola frase. Elegí un enfoque arriba. Probá con uno de estos:</p><div class="egs" id="egs"></div></div>';
-  initEgs();
+  $("#threadInner").innerHTML = '<div class="empty" id="empty"><div class="modecards"><button class="modecard" data-mode="auto"><div class="mc-ico">🏓</div><div class="mc-title">Ping pong creativo</div><div class="mc-desc">Subí el brief de tu campaña o contame una idea, y entre ambos vamos a encontrar el mejor camino.</div></button><button class="modecard" data-mode="presion"><div class="mc-ico">🥊</div><div class="mc-title">Bochador de ideas</div><div class="mc-desc">¿Tenés una idea cerrada? Probala acá para asegurarte de que sea infalible.</div></button></div></div>';
+  wireModeCards();
+}
+function setMode(m){
+  voice = m;
+  document.querySelectorAll(".modecard").forEach(x=>x.classList.toggle("on", x.dataset.mode===voice));
+  document.querySelectorAll("#modeToggle button").forEach(b=>b.classList.toggle("on", b.dataset.mode===voice));
+}
+function wireModeCards(){
+  document.querySelectorAll(".modecard").forEach(c=>{
+    c.classList.toggle("on", c.dataset.mode===voice);
+    c.onclick=()=>{ setMode(c.dataset.mode); const inp=$("#input"); if(inp) inp.focus(); };
+  });
 }
 function renderThread(){
   $("#threadInner").innerHTML = "";
   if(!hist.length){ showEmpty(); return; }
-  hist.forEach(m=>{ if(m.role==="user"){ addUser(m.content); } else { const b=botShell(); paras(b, mdLite(m.content)); } });
+  hist.forEach(m=>{ if(m.role==="user"){ addUser(msgText(m)); } else { const b=botShell(); paras(b, mdLite(msgText(m))); addSaveBtn(b, msgText(m)); } });
 }
 function renderHistory(){
   const box=$("#history"); if(!box) return;
@@ -609,19 +672,94 @@ function openChat(id){
   chatId=id; hist=(c.hist||[]).slice(); voice=c.voice||voice; turn=hist.length;
   localStorage.setItem("mentorDemo.current", id);
   renderThread(); renderHistory();
-  const box=$("#voices"); if(box){ [...box.querySelectorAll(".chip")].forEach(ch=>ch.classList.toggle("on", ch.dataset.k===voice)); }
+  setMode(voice);
+}
+
+/* ===================== Ideas guardadas (marcar + descargar .txt) ===================== */
+function loadSaved(){ try{ return JSON.parse(localStorage.getItem("mentorDemo.saved")||"[]"); }catch(_){ return []; } }
+function cleanIdea(t){ return String(t||"").replace(/\[\/?REF\]/g,"").replace(/\*\*/g,""); }
+function saveIdea(text){
+  const a=loadSaved();
+  a.unshift({ ts:Date.now(), text:String(text||""), chat:chatTitle() });
+  localStorage.setItem("mentorDemo.saved", JSON.stringify(a.slice(0,200)));
+  renderSaved();
+}
+function renderSaved(){
+  const box=$("#saved"); if(!box) return;
+  const a=loadSaved();
+  const cnt=$("#savedCount"); if(cnt) cnt.textContent=a.length;
+  box.innerHTML = a.length ? "" : '<div class="hist-empty">Guardá ideas con 📌</div>';
+  a.forEach((x,i)=>{
+    const it=el("div","saved-item");
+    const t=el("span","saved-txt"); t.textContent=cleanIdea(x.text).replace(/\s+/g," ").slice(0,58); t.title=cleanIdea(x.text).slice(0,300);
+    const rm=el("button","saved-rm"); rm.textContent="✕"; rm.title="Quitar";
+    rm.onclick=()=>{ const arr=loadSaved(); arr.splice(i,1); localStorage.setItem("mentorDemo.saved", JSON.stringify(arr)); renderSaved(); };
+    it.append(t,rm); box.appendChild(it);
+  });
+}
+function addSaveBtn(bubble, rawText){
+  const msg=bubble.closest(".msg"); if(!msg || msg.querySelector(".saveidea")) return;
+  const b=el("button","saveidea"); b.textContent="📌 Guardar idea";
+  b.onclick=()=>{ saveIdea(rawText); b.textContent="✓ Guardada"; b.disabled=true; };
+  msg.appendChild(b);
+}
+function downloadIdeas(){
+  const a=loadSaved();
+  if(!a.length){ alert("Todavía no guardaste ninguna idea. Usá 📌 en las respuestas del mentor."); return; }
+  const txt = "IDEAS GUARDADAS — Mentor creativo\n\n" + a.map((x,i)=>`### Idea ${i+1}  ·  ${new Date(x.ts).toLocaleString()}${x.chat? "  ·  ("+x.chat+")":""}\n\n${cleanIdea(x.text)}\n`).join("\n----------------------------------------\n\n");
+  const blob=new Blob([txt],{type:"text/plain;charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const link=document.createElement("a"); link.href=url; link.download="ideas-mentor.txt"; document.body.appendChild(link); link.click(); link.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+
+/* ===================== Adjuntar PDF / imagen / .txt ===================== */
+let pendingFile = null;
+function msgText(m){ if(typeof m.content==="string") return m.content; const t=(m.content||[]).find(b=>b.type==="text"); return t? t.text : ""; }
+function fileToBase64(file){ return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(String(r.result).split(",")[1]); r.onerror=rej; r.readAsDataURL(file); }); }
+function fileToText(file){ return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(String(r.result)); r.onerror=rej; r.readAsText(file); }); }
+async function handleFile(file){
+  if(!file) return;
+  const name=file.name, mt=file.type||"";
+  try{
+    if(mt==="application/pdf" || /\.pdf$/i.test(name)){ pendingFile={kind:"document", media_type:"application/pdf", data:await fileToBase64(file), name}; }
+    else if(mt.indexOf("image/")===0){ pendingFile={kind:"image", media_type:mt, data:await fileToBase64(file), name}; }
+    else if(mt.indexOf("text/")===0 || /\.(txt|md)$/i.test(name)){ pendingFile={kind:"text", text:(await fileToText(file)).slice(0,20000), name}; }
+    else { alert("Formato no soportado. Subí PDF, imagen o .txt/.md. (Word/PPT: guardalos como PDF primero.)"); return; }
+    showAttachChip();
+  }catch(e){ alert("No pude leer el archivo: "+e); }
+}
+function showAttachChip(){
+  const c=$("#attachChip"); if(!c) return;
+  c.innerHTML="";
+  if(!pendingFile){ c.style.display="none"; return; }
+  const ico = pendingFile.kind==="image" ? "🖼️" : (pendingFile.kind==="document" ? "📄" : "📃");
+  const span=el("span"); span.textContent=ico+" "+pendingFile.name;
+  const x=el("button"); x.textContent="✕"; x.title="Quitar"; x.onclick=()=>{ pendingFile=null; showAttachChip(); };
+  c.append(span,x); c.style.display="flex";
 }
 
 async function send(){
-  const inp=$("#input"); const text=inp.value.trim(); if(!text) return;
+  const inp=$("#input"); let text=inp.value.trim();
+  if(!text && !pendingFile) return;
   inp.value=""; inp.style.height="auto";
-  addUser(text); hist.push({role:"user",content:text});
+  const file=pendingFile; pendingFile=null; showAttachChip();
+
+  if(file && file.kind==="text"){
+    const combined=(text? text+"\n\n":"")+"[Contenido del archivo "+file.name+"]:\n"+file.text;
+    hist.push({role:"user", content:combined}); addUser(text||"(archivo adjunto)", file.name);
+  } else if(file){
+    const blocks=[{type:"text", text: text || "Te adjunto esto. Leelo como brief o puntas y razoná desde ahí."}, {type:file.kind, source:{type:"base64", media_type:file.media_type, data:file.data}}];
+    hist.push({role:"user", content:blocks}); addUser(text||"(archivo adjunto)", file.name);
+  } else {
+    hist.push({role:"user", content:text}); addUser(text);
+  }
   const bubble=botShell(); bubble.innerHTML=`<span class="thinking">pensando</span>`;
 
   try{
-    const t=await liveReply(); hist.push({role:"assistant",content:t}); paras(bubble, mdLite(t));
+    const t=await liveReply(); hist.push({role:"assistant",content:t}); paras(bubble, mdLite(t)); addSaveBtn(bubble, t);
   }catch(e){
-    paras(bubble, `<p style="color:var(--accent)">⚠️ ${escapeHtml(e.message)}</p><p class="thinking" style="font-family:var(--sans)">El servidor no pudo responder (suele ser que falta configurar la API key en el server, o se acabó el crédito).</p>`);
+    paras(bubble, `<p style="color:var(--accent)">⚠️ ${escapeHtml(e.message)}</p><p class="thinking" style="font-family:var(--sans)">El servidor no pudo responder (suele ser la API key del server, el crédito, o un PDF muy pesado).</p>`);
   }
   turn++;
   saveCurrent(); renderHistory();
@@ -631,7 +769,7 @@ async function send(){
 function refreshStatus(){
   const pill=$("#statusPill");
   pill.textContent="En vivo · Claude"; pill.className="pill live";
-  $("#hint").textContent="Escribí un brief y el mentor lo razona con Claude. Elegí un enfoque arriba.";
+  $("#hint").textContent="Escribí un brief o adjuntá uno con 📎. Elegí el modo con 🏓 / 🥊.";
   const kb=$("#keyBtn"); if(kb) kb.style.display="none";
 }
 function openKey(){
@@ -648,12 +786,37 @@ function initTheme(){
 }
 
 /* ===================== Wire ===================== */
+/* ===================== Puerta de acceso (código compartido) ===================== */
+function showGate(err){
+  const g=$("#gate"); if(!g) return;
+  g.style.display="flex";
+  const e=$("#gateErr"); if(e) e.style.display = err ? "block" : "none";
+  const i=$("#gateInput"); if(i){ i.value=""; setTimeout(()=>i.focus(),50); }
+}
+function hideGate(){ const g=$("#gate"); if(g) g.style.display="none"; }
+function submitGate(){
+  const v=($("#gateInput").value||"").trim();
+  if(!v){ return; }
+  localStorage.setItem("mentorDemo.token", v);
+  hideGate();
+}
+function initGate(){
+  $("#gateEnter").onclick=submitGate;
+  $("#gateInput").addEventListener("keydown",(e)=>{ if(e.key==="Enter"){ e.preventDefault(); submitGate(); }});
+  if(!localStorage.getItem("mentorDemo.token")) showGate(false);
+}
+
 window.addEventListener("DOMContentLoaded",()=>{
-  initTheme(); initVoices(); initEgs(); refreshStatus();
+  initTheme(); initVoices(); initEgs(); refreshStatus(); wireModeCards();
   $("#send").onclick=send;
   $("#newChat").onclick=newChat;
   const _cur=localStorage.getItem("mentorDemo.current");
   if(_cur && loadChats().some(c=>c.id===_cur)){ openChat(_cur); } else { renderHistory(); }
+  renderSaved(); $("#dlIdeas").onclick=downloadIdeas; initGate();
+  $("#attachBtn").onclick=()=>$("#fileInput").click();
+  $("#fileInput").onchange=(e)=>{ handleFile(e.target.files[0]); e.target.value=""; };
+  document.querySelectorAll("#modeToggle button").forEach(b=>{ b.onclick=()=>setMode(b.dataset.mode); });
+  setMode(voice);
   const inp=$("#input");
   inp.addEventListener("input",()=>{ inp.style.height="auto"; inp.style.height=Math.min(inp.scrollHeight,180)+"px"; });
   inp.addEventListener("keydown",(e)=>{ if(e.key==="Enter"&&!e.shiftKey){ e.preventDefault(); send(); }});
